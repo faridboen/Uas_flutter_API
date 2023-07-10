@@ -20,7 +20,7 @@ import 'dart:convert';
 
 class ListQuote extends StatelessWidget {
   final String apiUrl =
-      "https://api-pesantren-indonesia.vercel.app/pesantren/3206.json";
+      "https://kodepos-2d475.firebaseio.com/kota_kab/k69.json?print=pretty";
 
   const ListQuote({super.key});
 
@@ -33,7 +33,7 @@ class ListQuote extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pesantren Indonesia'),
+        title: const Text('Nama-nama Daerah'),
       ),
       body: FutureBuilder<List<dynamic>>(
         future: _fetchListQuotes(),
@@ -44,40 +44,33 @@ class ListQuote extends StatelessWidget {
               itemCount: snapshot.data.length,
               itemBuilder: (BuildContext context, int index) {
                 var listTile = ListTile(
-                  leading: Image.asset(
-                    'background/oi.jpg',
-                    width: 60,
-                    height: 60,
-                  ),
+                  
                   title: Text(
-                    snapshot.data[index]['nama'],
+                    snapshot.data[index]['kodepos'].toString(),
                     textAlign: TextAlign.justify,
                   ),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Alamat: " + snapshot.data[index]['alamat'],
+                        "kelurahan: " + snapshot.data[index]['kelurahan'],
                         style: const TextStyle(fontStyle: FontStyle.italic),
                       ),
                       Text(
-                        "Nspp: " + snapshot.data[index]['nspp'],
+                        "kecamatan: " + snapshot.data[index]['kecamatan'],
                         style: const TextStyle(fontStyle: FontStyle.italic),
                       ),
-                      Text(
-                        "Nama Kyai: " + snapshot.data[index]['kyai'],
-                        style: const TextStyle(fontStyle: FontStyle.italic),
-                      ),
+                     
                     ],
                   ),
-                  trailing: SizedBox(
-                    width: 60,
-                    child: Row(
-                      children: [
-                        Text(snapshot.data[index]['id'].toString()),
-                      ],
-                    ),
-                  ),
+                  // trailing: SizedBox(
+                  //   width: 60,
+                  //   child: Row(
+                  //     children: [
+                  //       Text(snapshot.data[index]['id'].toString()),
+                  //     ],
+                  //   ),
+                  // ),
                 );
                 return Card(
                   child: listTile,
@@ -114,11 +107,6 @@ class ListQuote extends StatelessWidget {
 ---
 
 ### Tampilan halaman random quote
-
-![img1](asset/random.png)
-![img1](asset/1.png)
-
-```Dart
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'listquote.dart';
@@ -138,7 +126,7 @@ class RandomQuote extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('List Pesantren Indonesia'),
+        title: const Text('Nama daerah'),
       ),
       body: FutureBuilder<dynamic>(
         future: _fetchRandomQuotes(),
@@ -151,7 +139,7 @@ class RandomQuote extends StatelessWidget {
                   child: Column(
                     children: [
                       Image.asset(
-                        'background/po.jpg',
+                        'background/daerah.jpg',
                         width: 400,
                         height: 280,
                         fit: BoxFit.cover,
@@ -205,7 +193,6 @@ class RandomQuote extends StatelessWidget {
     );
   }
 }
-
 ```
 
 #### `RandomQuote` adalah sebuah widget Flutter yang menampilkan sebuah kutipan acak dari sebuah API. Berikut penjelasan singkat mengenai implementasinya:
